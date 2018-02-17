@@ -6,19 +6,23 @@ class RobotState
   attr_reader :torso, :head
 
   def initialize
-    @pwm = self.create_pwm
+    self.initialize_pwm
     @torso = 200
     @head = 20
   end
 
-  def create_pwm
-    Rails.configuration.x.enable_hardware ? PWM.new(0x40, true) : nil
+  def initialize_pwm
+    return unless Rails.configuration.x.enable_hardware
+    @pwm = PWM.new(0x40, true)
+    @pwm.set_pwm_freq(60)
   end
 
   def update_pwm
     return unless Rails.configuration.x.enable_hardware
     @pwm_semaphore ||= Mutex.new
-    @pwm_semaphore.synchronize { }
+    @pwm_semaphore.synchronize {
+      @pwm.set_pwm(3, 0, @torso)
+    }
   end
 
   def update(state)
