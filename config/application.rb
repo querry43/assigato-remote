@@ -27,6 +27,6 @@ module AssigatoRemote
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.web_console.whiny_requests = false
+    config.x.enable_hardware = false
   end
 end
