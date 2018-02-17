@@ -1,5 +1,7 @@
 class RobotState
-  attr_accessor :torso, :head
+  include Singleton
+
+  attr_reader :torso, :head
 
   def initialize
     @torso = 200

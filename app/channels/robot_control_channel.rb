@@ -1,15 +1,14 @@
 class RobotControlChannel < ApplicationCable::Channel
   def subscribed
     stream_from 'control_channel'
-    @state = RobotState.new
   end
 
   def get_state
-    ActionCable.server.broadcast 'control_channel', @state
+    ActionCable.server.broadcast 'control_channel', RobotState.instance
   end
 
   def update_state(state)
-    @state.update(state)
+    RobotState.instance.update(state)
     get_state
   end
 end
