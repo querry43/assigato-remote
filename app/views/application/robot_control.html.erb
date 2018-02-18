@@ -1,27 +1,29 @@
-This is the assi-gato controller
+<div class="container">
 
-<br/>
+  <div class="robot_container">
+    <img src="assi-gato.png">
 
-Head Pan: <input id="head_pan" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()">
-<br/>
-Head Tilt: <input id="head_tilt" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()">
-<br/>
-Left Arm: <input id="left_arm" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()">
-<br/>
-Right Arm: <input id="right_arm" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()">
-<br/>
-Torso: <input id="torso" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()">
-<br/>
+    <input id="head_pan" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()">
+    <input id="head_tilt" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="right_arm" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="left_arm" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="torso" type="range" min="50" max="1000" step="50" oninput="App.robot_control.input()">
+  </div>
 
-Left Eye (Red): <input id="left_eye_r" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()">
-<br/>
-Left Eye (Green): <input id="left_eye_g" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()">
-<br/>
-Left Eye (Blue): <input id="left_eye_b" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()">
-<br/>
+  <div class="eye_container">
+    <p>Left Eye</p>
+    <input id="left_eye_r" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="left_eye_g" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="left_eye_b" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <p>R G B</p>
+  </div>
 
-Right Eye (Red): <input id="right_eye_r" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()">
-<br/>
-Right Eye (Green): <input id="right_eye_g" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()">
-<br/>
-Right Eye (Blue): <input id="right_eye_b" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()">
+  <div class="eye_container">
+    <p>Right Eye</p>
+    <input id="right_eye_r" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="right_eye_g" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="right_eye_b" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <p>R G B</p>
+  </div>
+
+</div>
