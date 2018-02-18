@@ -49,7 +49,7 @@ class RobotState
     @pwm_semaphore ||= Mutex.new
     @pwm_semaphore.synchronize {
 
-      @@pwm_motor_channels.each { |key, channel|
+      [@@pwm_motor_channels, @@pwm_led_channels].each { |key, channel|
         @pwm.set_pwm(channel, 0, self.instance_variable_get("@#{key.to_s}".to_sym))
       }
 
@@ -57,7 +57,7 @@ class RobotState
   end
 
   def update(state)
-    @@pwm_motor_channels.each_key do |attr|
+    @@pwm_motor_channels.merge(@@pwm_led_channels).each_key do |attr|
       if not state[attr.to_s].nil? then
         self.instance_variable_set("@#{attr.to_s}".to_sym, state[attr.to_s].to_i)
       end
