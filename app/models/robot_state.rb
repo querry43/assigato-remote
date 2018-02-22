@@ -49,9 +49,9 @@ class RobotState
     @pwm_semaphore ||= Mutex.new
     @pwm_semaphore.synchronize {
 
-      [@@pwm_motor_channels, @@pwm_led_channels].each { |key, channel|
+      @@pwm_motor_channels.merge(@@pwm_led_channels).each do |key, channel|
         @pwm.set_pwm(channel, 0, self.instance_variable_get("@#{key.to_s}".to_sym))
-      }
+      end
 
     }
   end
