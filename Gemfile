@@ -58,4 +58,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'adafruit-servo-driver'
-gem 'rpi_gpio'
+gem 'config'
+
+group :production do
+  gem 'rpi_gpio'
+end

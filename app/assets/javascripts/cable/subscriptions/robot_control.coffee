@@ -32,4 +32,4 @@ App.robot_control = App.cable.subscriptions.create 'RobotControlChannel',
     @perform 'update_state', state
 
   received: (state) ->
-    App.robot_pwm_channels.forEach (channel) -> $('#' + channel).val(state[channel])
+    App.robot_pwm_channels.forEach (channel) -> $('#' + channel).val(state['pwm_channels'][channel])

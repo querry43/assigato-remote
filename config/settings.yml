@@ -1,0 +1,58 @@
+---
+servo_base: &servo_base
+  low: 50
+  high: 1000
+  init: 400
+  invert: false
+
+led_base: &led_base
+  low: 0
+  high: 4095
+  init: 1024
+
+pwm_channels:
+  head_pan:
+    <<: *servo_base
+    channel: 2
+    invert: true
+
+  head_tilt:
+    <<: *servo_base
+    channel: 4
+
+  left_arm:
+    <<: *servo_base
+    channel: 1
+
+  right_arm:
+    <<: *servo_base
+    channel: 0
+    invert: true
+
+  torso:
+    <<: *servo_base
+    channel: 3
+
+  left_eye_r:
+    <<: *led_base
+    channel: 12
+
+  left_eye_g:
+    <<: *led_base
+    channel: 13
+
+  left_eye_b:
+    <<: *led_base
+    channel: 14
+
+  right_eye_r:
+    <<: *led_base
+    channel: 8
+
+  right_eye_g:
+    <<: *led_base
+    channel: 9
+
+  right_eye_b:
+    <<: *led_base
+    channel: 10
