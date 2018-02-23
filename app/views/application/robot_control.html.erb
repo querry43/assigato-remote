@@ -11,6 +11,14 @@
   </div>
 
   <div class="eye_container">
+    <p>Right Eye</p>
+    <input id="right_eye_r" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="right_eye_g" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <input id="right_eye_b" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
+    <p>R G B</p>
+  </div>
+
+  <div class="eye_container">
     <p>Left Eye</p>
     <input id="left_eye_r" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
     <input id="left_eye_g" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
@@ -18,12 +26,8 @@
     <p>R G B</p>
   </div>
 
-  <div class="eye_container">
-    <p>Right Eye</p>
-    <input id="right_eye_r" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
-    <input id="right_eye_g" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
-    <input id="right_eye_b" type="range" min="0" max="4095" step="50" oninput="App.robot_control.input()" orient="vertical">
-    <p>R G B</p>
+  <div>
+    <input value="Rest" type="button" onimput="App.robot_control.rest()">
   </div>
 
 </div>

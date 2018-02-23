@@ -4,11 +4,15 @@ class RobotControlChannel < ApplicationCable::Channel
   end
 
   def get_state
-    ActionCable.server.broadcast 'control_channel', RobotState.instance
+    ActionCable.server.broadcast 'control_channel', Robot.instance
   end
 
   def update_state(state)
-    RobotState.instance.update(state)
+    Robot.instance.update(state)
     get_state
+  end
+
+  def rest
+    Robot.instance.rest
   end
 end

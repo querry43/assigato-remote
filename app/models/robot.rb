@@ -1,6 +1,6 @@
 require 'adafruit-servo-driver'
 
-class RobotState
+class Robot
   include Singleton
 
   attr_reader :pwm_channels
