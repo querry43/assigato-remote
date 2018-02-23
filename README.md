@@ -1,9 +1,30 @@
 # assigato-remote
 
-Building
-========
+Dependencies
+============
 
-This software requires ruby 2.3.1 or greater as well as bundler.
+This software requires ruby 2.3.1, bundler, and some system-level tools.
+
+```
+sudo apt-get install ruby-dev libffi-dev nodejs
+sudo gem install bundler
+```
+
+ic2 tools is not necessary but helpful:
+
+```
+sudo apt-get install i2c-tools
+```
+
+i2c modules need to be loaded as well:
+
+```
+echo i2c-dev | sudo tee -a /etc/modules
+echo i2c-bcm2708 | sudo tee -a /etc/modules
+
+```
+
+Bundle the local dependencies into the application.
 
 ```
 bundle install --path vendor/bundle
