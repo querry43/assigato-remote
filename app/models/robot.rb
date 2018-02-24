@@ -36,6 +36,10 @@ class Robot
   end
 
   def initialize_display
+    Settings.led_display.each do |channel|
+      @displays.push(Array.new(channel[:segments], false))
+    end
+
     return unless Rails.configuration.x.enable_hardware
 
     require 'rpi_gpio'
@@ -47,14 +51,10 @@ class Robot
       [channel[:clock_pin], channel[:data_pin]].each do |pin|
         RPi::GPIO.setup pin, :as => :output, :initialize => :low
       end
-      @displays.push(Array.new(channel[:segments], false))
     end
   end
 
-  #bitbang(20, 21, Array.new(16, false))
-
   def bitbang(clock_pin, data_pin, data)
-    puts "clock_pin:#{clock_pin} data_pin:#{data_pin} data:#{data}"
     data.each do |b|
       if b
         RPi::GPIO.set_low data_pin
@@ -75,11 +75,10 @@ class Robot
     return unless Rails.configuration.x.enable_hardware
 
     @displays.each_index do |i|
-      puts "display #{i} -> #{@displays[i]}"
       self.bitbang(
         Settings.led_display[i][:clock_pin],
         Settings.led_display[i][:data_pin],
-        @displays[i],
+        @displays[i].reverse,
       )
     end
   end
@@ -91,7 +90,13 @@ class Robot
       end
     end
 
+    if state['toggle_display'] then
+      led = state['toggle_display']
+      @displays[led['channel']][led['position']] = ! @displays[led['channel']][led['position']]
+    end
+
     self.update_pwm
+    self.update_display
   end
 
   def rest

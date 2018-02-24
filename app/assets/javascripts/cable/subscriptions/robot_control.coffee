@@ -23,13 +23,19 @@ App.robot_control = App.cable.subscriptions.create 'RobotControlChannel',
   disconnected: ->
     console.log 'cable connection lost'
 
-  input: ->
+  update_slider: ->
     state = {}
     App.robot_pwm_channels.forEach (channel) -> state[channel] = $('#' + channel).val()
     App.robot_control.update state
+
+  update_display: (channel, position) ->
+    App.robot_control.update {toggle_display: {channel: channel, position: position}}
 
   update: (state) ->
     @perform 'update_state', state
 
   received: (state) ->
     App.robot_pwm_channels.forEach (channel) -> $('#' + channel).val(state['pwm_channels'][channel])
+    state['displays'].forEach (positions, channel) ->
+      positions.forEach (val, position) ->
+        $(".display_col.channel_#{channel} > img.position_#{position}").attr('src', if val then 'led-on.png' else 'led-off.png')
