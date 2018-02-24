@@ -27,10 +27,8 @@ class Robot
       t *= -1
       t += 1
     end
-    range = Settings.pwm_channels[key][:high]
-      - Settings.pwm_channels[key][:low]
-    pwm = ((range * t) + Settings.pwm_channels[key][:low]).to_i
-    puts "key:#{key} t:#{t} range:#{range} pwm:#{pwm}"
+    range = Settings.pwm_channels[key][:high] - Settings.pwm_channels[key][:low]
+    return ((range * t) + Settings.pwm_channels[key][:low]).to_i
   end
 
   def update_pwm

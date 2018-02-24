@@ -31,6 +31,9 @@ App.robot_control = App.cable.subscriptions.create 'RobotControlChannel',
   update_display: (channel, position) ->
     App.robot_control.update {toggle_display: {channel: channel, position: position}}
 
+  rest: ->
+    @perform 'rest'
+
   update: (state) ->
     @perform 'update_state', state
 
