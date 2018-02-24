@@ -30,6 +30,13 @@ Bundle the local dependencies into the application.
 bundle install --path vendor/bundle
 ```
 
+When using PWM audio, enable the device overlay:
+
+```
+echo "dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4" | sudo tee -a /boot/config.txt
+sudo /sbin/shutdown -r now
+```
+
 Running
 =======
 

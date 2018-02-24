@@ -56,3 +56,12 @@ pwm_channels:
   right_eye_b:
     <<: *led_base
     channel: 10
+
+led_display:
+  - clock_pin: 20
+    data_pin: 21
+    segments: 16
+
+  - clock_pin: 19
+    data_pin: 26
+    segments: 16
