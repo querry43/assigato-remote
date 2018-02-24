@@ -1,5 +1,4 @@
 require 'adafruit-servo-driver'
-require 'rpi_gpio'
 
 class Robot
   include Singleton
@@ -38,6 +37,8 @@ class Robot
 
   def initialize_display
     return unless Rails.configuration.x.enable_hardware
+
+    require 'rpi_gpio'
 
     RPi::GPIO.set_numbering :bcm
     RPi::GPIO.set_warnings false
