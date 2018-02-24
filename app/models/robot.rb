@@ -22,6 +22,17 @@ class Robot
     @pwm.set_pwm_freq(60)
   end
 
+  def scale_pwm(key, t)
+    if Settings.pwm_channels[key][:invert]
+      t *= -1
+      t += 1
+    end
+    range = Settings.pwm_channels[key][:high]
+      - Settings.pwm_channels[key][:low]
+    pwm = ((range * t) + Settings.pwm_channels[key][:low]).to_i
+    puts "key:#{key} t:#{t} range:#{range} pwm:#{pwm}"
+  end
+
   def update_pwm
     return unless Rails.configuration.x.enable_hardware
 
@@ -29,7 +40,7 @@ class Robot
     @pwm_semaphore.synchronize {
 
       @pwm_channels.each do |key, val|
-        @pwm.set_pwm(Settings.pwm_channels[key][:channel], 0, val)
+        @pwm.set_pwm(Settings.pwm_channels[key][:channel], 0, self.scale_pwm(key, val))
       end
 
     }
@@ -86,7 +97,7 @@ class Robot
   def update(state)
     @pwm_channels.each_key do |key|
       if not state[key.to_s].nil? then
-        @pwm_channels[key] = state[key.to_s].to_i
+        @pwm_channels[key] = state[key.to_s].to_f
       end
     end
 

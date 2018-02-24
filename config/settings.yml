@@ -2,13 +2,13 @@
 servo_base: &servo_base
   low: 50
   high: 1000
-  init: 400
+  init: 0.5
   invert: false
 
 led_base: &led_base
   low: 0
   high: 4095
-  init: 1024
+  init: 0.2
 
 pwm_channels:
   head_pan:
