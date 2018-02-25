@@ -37,12 +37,12 @@ class Robot
   end
 
   def idle_pwm
-    return unless Rails.configuration.x.enable_hardware
+    return unless Settings.enable_hardware
     @pwm.set_all_pwm(0, 0)
   end
 
   def talk
-    return unless Rails.configuration.x.enable_hardware
+    return unless Settings.enable_hardware
     system("espeak -s 120 'hello, my name is assigato,,  i am a robot,, beep boop'")
   end
 
@@ -52,7 +52,7 @@ class Robot
   end
 
   def init_pwm_hardware
-    return unless Rails.configuration.x.enable_hardware
+    return unless Settings.enable_hardware
     @pwm = PWM.new(0x40, true)
     @pwm.set_pwm_freq(60)
   end
@@ -67,7 +67,7 @@ class Robot
   end
 
   def update_pwm
-    return unless Rails.configuration.x.enable_hardware
+    return unless Settings.enable_hardware
 
     @pwm_semaphore ||= Mutex.new
     @pwm_semaphore.synchronize {
@@ -84,7 +84,7 @@ class Robot
       @displays.push(Array.new(channel[:segments], false))
     end
 
-    return unless Rails.configuration.x.enable_hardware
+    return unless Settings.enable_hardware
 
     require 'rpi_gpio'
 
@@ -116,7 +116,7 @@ class Robot
   end
 
   def update_display
-    return unless Rails.configuration.x.enable_hardware
+    return unless Settings.enable_hardware
 
     @displays.each_index do |i|
       self.bitbang(

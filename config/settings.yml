@@ -1,4 +1,7 @@
 ---
+
+enable_hardware: false
+
 servo_base: &servo_base
   low: 50
   high: 1000
