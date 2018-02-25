@@ -21,9 +21,19 @@ div.robot_container
 
 div.eye_container
 {
-  width: 100px;
+  width: 70px;
+  margin: 0px 10px;
   text-align: center;
   float: left;
+}
+
+div.eye_slider_container
+{
+  width: 22px;
+  float: left;
+  &.red { background-color: red; }
+  &.green { background-color: green; }
+  &.blue { background-color: blue; }
 }
 
 div.display_col
