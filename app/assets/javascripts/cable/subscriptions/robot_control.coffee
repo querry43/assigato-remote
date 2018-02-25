@@ -30,6 +30,11 @@ App.robot_control = App.cable.subscriptions.create 'RobotControlChannel',
 
   update_led_display: (channel, position) ->
     App.robot_control.update {toggle_led_display: {channel: channel, position: position}}
+    $(".led_display_character.channel_#{channel}").val('')
+
+  update_led_display_character: (channel) ->
+    char = $(".led_display_character.channel_#{channel}").val()
+    App.robot_control.update {led_display_character: {channel: channel, character: char}}
 
   reset_pwm: ->
     @perform 'reset_pwm'

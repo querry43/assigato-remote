@@ -25,8 +25,16 @@ class Robot
     end
 
     if state['toggle_led_display'] then
-      led = state['toggle_led_display']
-      @led_displays[led['channel']][led['position']] = ! @led_displays[led['channel']][led['position']]
+      chan = state['toggle_led_display']['channel']
+      pos = state['toggle_led_display']['position']
+      @led_displays[chan][pos] = ! @led_displays[chan][pos]
+    end
+
+    if state['led_display_character'] then
+      chan = state['led_display_character']['channel']
+      char = state['led_display_character']['character']
+
+      @led_displays[chan] = Settings.letters[char].clone
     end
 
     self.update_pwm

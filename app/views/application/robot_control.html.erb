@@ -39,6 +39,31 @@
 
   <div class="led_display_container">
     <p>LED Display</p>
+
+    <% [1, 0].each do |channel| %>
+      <select class="led_display_character channel_<%= channel %>" onchange="App.robot_control.update_led_display_character(<%= channel %>)">
+        <% @letters.each do |letter| %>
+        <option value="<%= letter.to_s %>"><%= letter.to_s %></option>
+        <% end %>
+      </select>
+    <% end %>
+
+    <br/>
+
+    <% [1, 0].each do |channel| %>
+      <% [12, 8, 4, 0].each do |col| %>
+      <div class="led_display_col channel_<%= channel %>">
+        <% (0..3).each do |row| %>
+        <img
+          src="led-off.png"
+          class="position_<%= col+row %>"
+          onclick="App.robot_control.update_led_display(<%= channel %>, <%= col+row %>)">
+        <% end %>
+      </div>
+      <% end %>
+    <% end %>
+
+    <br/>
   </div>
 
   <div class="button_container">
@@ -53,5 +78,3 @@
     <input value="Talk" type="button" onclick="App.robot_control.talk_freeform()">
   </div>
 </div>
-
-<script>render_led_display()</script>
