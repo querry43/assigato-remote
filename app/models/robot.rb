@@ -3,16 +3,16 @@ require 'adafruit-servo-driver'
 class Robot
   include Singleton
 
-  attr_reader :pwm_channels, :displays
+  attr_reader :pwm_channels, :led_displays
 
   def initialize
-    @displays = []
+    @led_displays = []
 
     self.init_pwm_value
     self.init_pwm_hardware
     self.update_pwm
     self.init_led_display
-    self.update_display
+    self.update_led_display
   end
 
   def update(state)
@@ -22,13 +22,13 @@ class Robot
       end
     end
 
-    if state['toggle_display'] then
-      led = state['toggle_display']
-      @displays[led['channel']][led['position']] = ! @displays[led['channel']][led['position']]
+    if state['toggle_led_display'] then
+      led = state['toggle_led_display']
+      @led_displays[led['channel']][led['position']] = ! @led_displays[led['channel']][led['position']]
     end
 
     self.update_pwm
-    self.update_display
+    self.update_led_display
   end
 
   def reset_pwm
@@ -81,7 +81,7 @@ class Robot
 
   def init_led_display
     Settings.led_display.each do |channel|
-      @displays.push(Array.new(channel[:segments], false))
+      @led_displays.push(Array.new(channel[:segments], false))
     end
 
     return unless Settings.enable_hardware
@@ -115,14 +115,14 @@ class Robot
     RPi::GPIO.set_low pin
   end
 
-  def update_display
+  def update_led_display
     return unless Settings.enable_hardware
 
-    @displays.each_index do |i|
+    @led_displays.each_index do |i|
       self.bitbang(
         Settings.led_display[i][:clock_pin],
         Settings.led_display[i][:data_pin],
-        @displays[i].reverse,
+        @led_displays[i].reverse,
       )
     end
   end

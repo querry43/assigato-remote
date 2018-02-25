@@ -1,6 +1,14 @@
-div.container
+div.left_container
 {
   overflow: hidden;
+  float: left;
+}
+
+div.right_container
+{
+  overflow: hidden;
+  float: left;
+  width: 200px;
 }
 
 div.robot_container
@@ -25,19 +33,40 @@ div.eye_container
   margin: 0px 10px;
   text-align: center;
   float: left;
+
+  p { margin: 5px 0 5px 0; }
+
+  .eye_slider_container
+  {
+    width: 22px;
+    float: left;
+    &.red { background-color: red; }
+    &.green { background-color: green; }
+    &.blue { background-color: blue; }
+  }
 }
 
-div.eye_slider_container
+div.led_display_container
 {
-  width: 22px;
-  float: left;
-  &.red { background-color: red; }
-  &.green { background-color: green; }
-  &.blue { background-color: blue; }
+  p { margin: 5px 0 5px 0; }
+
+  text-align: center;
+  width: 170px;
+  overflow: auto;
+  margin: 0 auto;
+  padding: 5px;
+
+  .led_display_col
+  {
+    width: 21px;
+    float: left;
+  }
 }
 
-div.display_col
+div.button_container
 {
-  width: 21px;
-  float: left;
+  p { margin: 5px 0 5px 0; }
+
+  width: 175px;
+  text-align: center;
 }
