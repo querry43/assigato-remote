@@ -6,7 +6,7 @@ Dependencies
 This software requires ruby 2.3.1, bundler, and some system-level tools.
 
 ```
-sudo apt-get install ruby-dev libffi-dev nodejs
+sudo apt-get install ruby-dev libffi-dev nodejs espeak
 sudo gem install bundler
 ```
 
@@ -46,7 +46,7 @@ Run the application in development without hardware control:
 bundle exec rails server
 ```
 
-Run the application in production with hardware control:
+Run the application in production with hardware control (See config/settings/production.yml):
 
 ```
 bundle exec rails server -e production
