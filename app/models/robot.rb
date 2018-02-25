@@ -3,20 +3,55 @@ require 'adafruit-servo-driver'
 class Robot
   include Singleton
 
-  attr_reader :pwm_channels
-  attr_accessor :displays
+  attr_reader :pwm_channels, :displays
 
   def initialize
-    @pwm_channels = Hash[Settings.pwm_channels.map do |key, val| [key, val['init']] end]
     @displays = []
 
-    self.initialize_pwm
+    self.init_pwm_value
+    self.init_pwm_hardware
     self.update_pwm
-    self.initialize_display
+    self.init_led_display
     self.update_display
   end
 
-  def initialize_pwm
+  def update(state)
+    @pwm_channels.each_key do |key|
+      if not state[key.to_s].nil? then
+        @pwm_channels[key] = state[key.to_s].to_f
+      end
+    end
+
+    if state['toggle_display'] then
+      led = state['toggle_display']
+      @displays[led['channel']][led['position']] = ! @displays[led['channel']][led['position']]
+    end
+
+    self.update_pwm
+    self.update_display
+  end
+
+  def reset_pwm
+    self.init_pwm_value
+    self.update_pwm
+  end
+
+  def idle_pwm
+    return unless Rails.configuration.x.enable_hardware
+    @pwm.set_all_pwm(0, 0)
+  end
+
+  def talk
+    return unless Rails.configuration.x.enable_hardware
+    system("espeak -s 120 'hello, my name is assigato,,  i am a robot,, beep boop'")
+  end
+
+  protected
+  def init_pwm_value
+    @pwm_channels = Hash[Settings.pwm_channels.map do |key, val| [key, val['init']] end]
+  end
+
+  def init_pwm_hardware
     return unless Rails.configuration.x.enable_hardware
     @pwm = PWM.new(0x40, true)
     @pwm.set_pwm_freq(60)
@@ -44,7 +79,7 @@ class Robot
     }
   end
 
-  def initialize_display
+  def init_led_display
     Settings.led_display.each do |channel|
       @displays.push(Array.new(channel[:segments], false))
     end
@@ -90,27 +125,6 @@ class Robot
         @displays[i].reverse,
       )
     end
-  end
-
-  def update(state)
-    @pwm_channels.each_key do |key|
-      if not state[key.to_s].nil? then
-        @pwm_channels[key] = state[key.to_s].to_f
-      end
-    end
-
-    if state['toggle_display'] then
-      led = state['toggle_display']
-      @displays[led['channel']][led['position']] = ! @displays[led['channel']][led['position']]
-    end
-
-    self.update_pwm
-    self.update_display
-  end
-
-  def rest
-    return unless Rails.configuration.x.enable_hardware
-    @pwm.set_all_pwm(0, 0)
   end
 
 end

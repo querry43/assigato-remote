@@ -12,7 +12,16 @@ class RobotControlChannel < ApplicationCable::Channel
     get_state
   end
 
-  def rest
-    Robot.instance.rest
+  def reset_pwm
+    Robot.instance.reset_pwm
+    get_state
+  end
+
+  def idle_pwm
+    Robot.instance.idle_pwm
+  end
+
+  def talk
+    Robot.instance.talk
   end
 end
