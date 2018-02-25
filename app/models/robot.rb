@@ -7,6 +7,7 @@ class Robot
 
   def initialize
     @led_displays = []
+    @semaphore = Mutex.new
 
     self.init_pwm_value
     self.init_pwm_hardware
@@ -69,14 +70,11 @@ class Robot
   def update_pwm
     return unless Settings.enable_hardware
 
-    @pwm_semaphore ||= Mutex.new
-    @pwm_semaphore.synchronize {
-
+    @semaphore.synchronize do
       @pwm_channels.each do |key, val|
         @pwm.set_pwm(Settings.pwm_channels[key][:channel], 0, self.scale_pwm(key, val))
       end
-
-    }
+    end
   end
 
   def init_led_display
@@ -118,12 +116,14 @@ class Robot
   def update_led_display
     return unless Settings.enable_hardware
 
-    @led_displays.each_index do |i|
-      self.bitbang(
-        Settings.led_display[i][:clock_pin],
-        Settings.led_display[i][:data_pin],
-        @led_displays[i].reverse,
-      )
+    @semaphore.synchronize do
+      @led_displays.each_index do |i|
+        self.bitbang(
+          Settings.led_display[i][:clock_pin],
+          Settings.led_display[i][:data_pin],
+          @led_displays[i].reverse,
+        )
+      end
     end
   end
 
