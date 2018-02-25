@@ -45,7 +45,12 @@
     <p>Actions</p>
     <input value="Reset" type="button" onclick="App.robot_control.reset_pwm()">
     <input value="Idle" type="button" onclick="App.robot_control.idle_pwm()">
-    <input value="Talk" type="button" onclick="App.robot_control.talk()">
+    <input value="Hello" type="button" onclick="App.robot_control.talk('hello, my name is assigato,,  i am a robot,, beep boop')">
+
+    <br/>
+
+    <input id="talk-text" type="text">
+    <input value="Talk" type="button" onclick="App.robot_control.talk_freeform()">
   </div>
 </div>
 

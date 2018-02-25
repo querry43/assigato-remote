@@ -1,4 +1,5 @@
 require 'adafruit-servo-driver'
+require 'shellwords'
 
 class Robot
   include Singleton
@@ -42,9 +43,10 @@ class Robot
     @pwm.set_all_pwm(0, 0)
   end
 
-  def talk
+  def talk(phrase)
+    puts phrase['phrase']
     return unless Settings.enable_hardware
-    system("espeak -s 120 'hello, my name is assigato,,  i am a robot,, beep boop'")
+    system("espeak -s 120 #{Shellwords.escape(phrase['phrase'])}")
   end
 
   protected

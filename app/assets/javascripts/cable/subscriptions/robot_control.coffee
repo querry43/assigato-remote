@@ -37,8 +37,11 @@ App.robot_control = App.cable.subscriptions.create 'RobotControlChannel',
   idle_pwm: ->
     @perform 'idle_pwm'
 
-  talk: ->
-    @perform 'talk'
+  talk: (phrase) ->
+    @perform 'talk', {phrase: phrase}
+
+  talk_freeform: ->
+    App.robot_control.talk $('#talk-text').val()
 
   update: (state) ->
     @perform 'update_state', state

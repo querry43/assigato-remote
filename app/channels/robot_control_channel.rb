@@ -21,7 +21,7 @@ class RobotControlChannel < ApplicationCable::Channel
     Robot.instance.idle_pwm
   end
 
-  def talk
-    Robot.instance.talk
+  def talk(phrase)
+    Robot.instance.talk(phrase)
   end
 end
