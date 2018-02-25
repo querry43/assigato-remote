@@ -51,3 +51,9 @@ Run the application in production with hardware control (See config/settings/pro
 ```
 bundle exec rails server -e production
 ```
+
+Running on the pi will be faster if you precompile first:
+
+```
+bundle exec rake assets:precompile
+```
