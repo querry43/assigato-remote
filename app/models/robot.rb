@@ -1,5 +1,6 @@
 require 'adafruit-servo-driver'
 require 'shellwords'
+require 'socket'
 
 class Robot
   include Singleton
@@ -55,6 +56,31 @@ class Robot
     puts phrase['phrase']
     return unless Settings.enable_hardware
     system("espeak -s 120 #{Shellwords.escape(phrase['phrase'])}")
+  end
+
+  def display_address
+    addr = (Socket.ip_address_list.select do |addr| addr.ipv4? and !addr.ipv4_loopback? end).first
+
+    3.times do
+      Robot.instance.led_displays[1] = Settings.letters['I']
+      Robot.instance.led_displays[0] = Settings.letters['P']
+      Robot.instance.update_led_display
+      sleep(1)
+
+      Robot.instance.led_displays[1] = Settings.letters[' ']
+      Robot.instance.led_displays[0] = Settings.letters[' ']
+      Robot.instance.update_led_display
+      sleep(1)
+    end
+
+    addr.ip_address.each_char do |c|
+      Robot.instance.led_displays[0] = Settings.letters[c]
+      Robot.instance.update_led_display
+      sleep(1)
+    end
+
+    Robot.instance.led_displays[0] = Settings.letters[' ']
+    Robot.instance.update_led_display
   end
 
   protected
@@ -136,5 +162,4 @@ class Robot
       end
     end
   end
-
 end

@@ -24,4 +24,8 @@ class RobotControlChannel < ApplicationCable::Channel
   def talk(phrase)
     Robot.instance.talk(phrase)
   end
+
+  def display_address
+    Robot.instance.display_address
+  end
 end

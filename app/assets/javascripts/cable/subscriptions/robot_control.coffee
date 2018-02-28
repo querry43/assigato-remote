@@ -48,6 +48,9 @@ App.robot_control = App.cable.subscriptions.create 'RobotControlChannel',
   talk_freeform: ->
     App.robot_control.talk $('#talk-text').val()
 
+  display_address: ->
+    @perform 'display_address'
+
   update: (state) ->
     @perform 'update_state', state
 
