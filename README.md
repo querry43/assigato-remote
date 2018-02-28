@@ -62,3 +62,9 @@ Running on the pi will be faster if you precompile first:
 ```
 bundle exec rake assets:precompile
 ```
+
+To run on boot, add this to your personal cron:
+
+```
+@reboot cd /home/pi/assigato-remote/ && /usr/local/bin/bundle exec rails server -e production > /tmp/assigato.log 2>&1
+```
