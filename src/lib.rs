@@ -1,7 +1,4 @@
-extern crate config;
-extern crate i2c_pca9685;
-extern crate i2cdev;
-extern crate rppal;
+extern crate pi_robot;
 extern crate serde_json;
 
 use std::fmt;
@@ -9,13 +6,11 @@ use std::fmt;
 #[macro_use]
 extern crate serde_derive;
 
-pub mod robot;
-
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Message {
-    PWMChannelState(robot::PWMChannelState),
-    LEDDisplayState(robot::LEDDisplayState),
-    RobotSpeak(robot::RobotSpeak),
+    PWMChannelState(pi_robot::PWMChannelState),
+    LEDDisplayState(pi_robot::LEDDisplayState),
+    RobotSpeak(pi_robot::RobotSpeak),
 }
 
 impl fmt::Display for Message {

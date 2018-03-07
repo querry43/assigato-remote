@@ -1,4 +1,5 @@
 extern crate assigato_remote;
+extern crate pi_robot;
 extern crate ws;
 
 use std::sync::{Arc, Mutex};
@@ -9,7 +10,7 @@ use ws::{listen, Handler, Sender, Handshake, CloseCode};
 
 struct Server {
     out: Sender,
-    robot: Arc<Mutex<assigato_remote::robot::Robot>>,
+    robot: Arc<Mutex<pi_robot::Robot>>,
 }
 
 impl Handler for Server {
@@ -47,13 +48,13 @@ impl Handler for Server {
 
 
 fn main() {
-    let robot = Arc::new(Mutex::new(assigato_remote::robot::Robot::new().unwrap()));
+    let robot = Arc::new(Mutex::new(pi_robot::Robot::new("config/robot.yaml").unwrap()));
     println!("{:?}", robot);
 	spawn_robot_update_thread(robot.clone());
 	listen("127.0.0.1:3012", |out| Server { out: out, robot: robot.clone() } ).unwrap()
 } 
 
-fn spawn_robot_update_thread(robot: Arc<Mutex<assigato_remote::robot::Robot>>) {
+fn spawn_robot_update_thread(robot: Arc<Mutex<pi_robot::Robot>>) {
     thread::spawn(move || {
         loop {
             sleep(Duration::from_secs(1));
