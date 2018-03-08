@@ -1,0 +1,77 @@
+div.left_container
+{
+  overflow: hidden;
+  float: left;
+}
+
+div.right_container
+{
+  overflow: hidden;
+  float: left;
+  width: 200px;
+}
+
+div.robot_container
+{
+  position: relative;
+  padding: 30px;
+  width: 365px;
+  float: left;
+
+  input { position: absolute; }
+
+  #head_pan { top: 0px; left: 120px; }
+  #head_tilt { top: 40px; left: 280px; height: 100px; }
+  #right_arm { top: 200px; left: 0px; }
+  #left_arm { top: 200px; left: 400px; }
+  #torso { top: 630px; left: 120px; }
+}
+
+div.eye_container
+{
+  width: 70px;
+  margin: 0px 10px;
+  text-align: center;
+  float: left;
+
+  p { margin: 5px 0 5px 0; }
+
+  .eye_slider_container
+  {
+    width: 22px;
+    float: left;
+    &.red { background-color: red; }
+    &.green { background-color: green; }
+    &.blue { background-color: blue; }
+  }
+}
+
+div.led_display_container
+{
+  p { margin: 5px 0 5px 0; }
+
+  text-align: center;
+  width: 170px;
+  overflow: auto;
+  margin: 0 auto;
+  padding: 5px;
+
+  .led_display_col
+  {
+    width: 21px;
+    float: left;
+  }
+
+  .led_display_character
+  {
+    margin: 5px 20px;
+  }
+}
+
+div.button_container
+{
+  p { margin: 5px 0 5px 0; }
+
+  width: 175px;
+  text-align: center;
+}

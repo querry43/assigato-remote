@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <link rel="stylesheet/less" type="text/css" href="styles/vertical-slider.less" />
+    <link rel="stylesheet/less" type="text/css" href="styles/robot-control.less" />
+  </head>
+
+  <body>
+    <div class="left_container">
+      <div class="robot_container">
+        <img src="assi-gato.png">
+
+        <input class="slider" id="head_pan" type="range" min="0" max="1" step="0.1" oninput="update_slider()">
+        <input class="slider" id="head_tilt" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+        <input class="slider" id="right_arm" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+        <input class="slider" id="left_arm" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+        <input class="slider" id="torso" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()">
+      </div>
+    </div>
+
+    <div class="right_container">
+        <div class="eye_container">
+          <p>Right Eye</p>
+          <div class="eye_slider_container red">
+            <input id="right_eye_r" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+          </div>
+          <div class="eye_slider_container green">
+            <input id="right_eye_g" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+          </div>
+          <div class="eye_slider_container blue">
+            <input id="right_eye_b" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+          </div>
+        </div>
+
+        <div class="eye_container">
+          <p>Left Eye</p>
+          <div class="eye_slider_container red">
+            <input id="left_eye_r" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+          </div>
+          <div class="eye_slider_container green">
+            <input id="left_eye_g" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+          </div>
+          <div class="eye_slider_container blue">
+            <input id="left_eye_b" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+          </div>
+        </div>
+
+      <div class="led_display_container">
+        <p>LED Display</p>
+
+<!--
+        <% [1, 0].each do |channel| %>
+          <select class="led_display_character channel_<%= channel %>" onchange="App.robot_control.update_led_display_character(<%= channel %>)">
+            <% @letters.each do |letter| %>
+            <option value="<%= letter.to_s %>"><%= letter.to_s %></option>
+            <% end %>
+          </select>
+        <% end %>
+
+        <br/>
+
+        <% [1, 0].each do |channel| %>
+          <% [12, 8, 4, 0].each do |col| %>
+          <div class="led_display_col channel_<%= channel %>">
+            <% (0..3).each do |row| %>
+            <img
+              src="led-off.png"
+              class="position_<%= col+row %>"
+              onclick="App.robot_control.update_led_display(<%= channel %>, <%= col+row %>)">
+            <% end %>
+          </div>
+          <% end %>
+        <% end %>
+-->
+
+        <br/>
+      </div>
+
+      <div class="button_container">
+        <p>Actions</p>
+        <input value="Reset" type="button" onclick="App.robot_control.reset_pwm()">
+        <input value="Idle" type="button" onclick="App.robot_control.idle_pwm()">
+        <input value="Hello" type="button" onclick="App.robot_control.talk('hello, my name is assigato,,  i am a robot,, beep boop')">
+        <input value="Address" type="button" onclick="App.robot_control.display_address()">
+
+        <br/>
+
+        <input id="talk-text" type="text">
+        <input value="Talk" type="button" onclick="App.robot_control.talk_freeform()">
+      </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/robot.js"></script>
+    <script src="js/less.min.js" ></script>
+  </body>
+</html>

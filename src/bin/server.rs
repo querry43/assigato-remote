@@ -51,7 +51,7 @@ fn main() {
     let robot = Arc::new(Mutex::new(pi_robot::Robot::new("config/robot.yaml").unwrap()));
     println!("{:?}", robot);
 	spawn_robot_update_thread(robot.clone());
-	listen("127.0.0.1:3012", |out| Server { out: out, robot: robot.clone() } ).unwrap()
+	listen("0.0.0.0:3000", |out| Server { out: out, robot: robot.clone() } ).unwrap()
 } 
 
 fn spawn_robot_update_thread(robot: Arc<Mutex<pi_robot::Robot>>) {
