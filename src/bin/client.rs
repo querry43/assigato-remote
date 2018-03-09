@@ -13,8 +13,10 @@ impl Handler for Client {
     fn on_open(&mut self, _: Handshake) -> ws::Result<()> {
         println!("connected");
         //let m: assigato_remote::Message = assigato_remote::Message::PWMChannelState(pi_robot::PWMChannelState { channel: 3, position: 0.73 } );
-        //let m: assigato_remote::Message = assigato_remote::Message::LEDDisplayState(pi_robot::LEDDisplayState { channel: 0, state: [ false, true, false, true, false, false, false, false, true, true, true, true, false, false, false, true ] } );
-        let m: assigato_remote::Message = assigato_remote::Message::RobotSpeak(pi_robot::RobotSpeak { quip: String::from("hello") });
+        let m: assigato_remote::Message = assigato_remote::Message::LEDDisplayState(pi_robot::LEDDisplayState { channel: 0, state: [ false, true, false, true, false, false, false, false, true, true, true, true, false, false, false, true ] } );
+        //let m: assigato_remote::Message = assigato_remote::Message::RobotSpeak(pi_robot::RobotSpeak { quip: String::from("hello") });
+
+        println!("{}", m.to_string());
         self.out.send(m.to_string())
     }
 

@@ -9,11 +9,11 @@
       <div class="robot_container">
         <img src="assi-gato.png">
 
-        <input class="slider" id="head_pan" type="range" min="0" max="1" step="0.1" oninput="update_slider()">
-        <input class="slider" id="head_tilt" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
-        <input class="slider" id="right_arm" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
-        <input class="slider" id="left_arm" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
-        <input class="slider" id="torso" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()">
+        <input class="slider" id="head_pan" data-pwm-channel="2" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)">
+        <input class="slider" id="head_tilt" data-pwm-channel="4" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
+        <input class="slider" id="right_arm" data-pwm-channel="0" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
+        <input class="slider" id="left_arm" data-pwm-channel="1" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
+        <input class="slider" id="torso" data-pwm-channel="3" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)">
       </div>
     </div>
 
@@ -21,30 +21,30 @@
         <div class="eye_container">
           <p>Right Eye</p>
           <div class="eye_slider_container red">
-            <input id="right_eye_r" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+            <input id="right_eye_r" data-pwm-channel="8" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
           </div>
           <div class="eye_slider_container green">
-            <input id="right_eye_g" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+            <input id="right_eye_g" data-pwm-channel="9" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
           </div>
           <div class="eye_slider_container blue">
-            <input id="right_eye_b" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+            <input id="right_eye_b" data-pwm-channel="10" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
           </div>
         </div>
 
         <div class="eye_container">
           <p>Left Eye</p>
           <div class="eye_slider_container red">
-            <input id="left_eye_r" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+            <input id="left_eye_r" data-pwm-channel="12" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
           </div>
           <div class="eye_slider_container green">
-            <input id="left_eye_g" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+            <input id="left_eye_g" data-pwm-channel="13" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
           </div>
           <div class="eye_slider_container blue">
-            <input id="left_eye_b" type="range" min="0" max="1" step="0.1" oninput="App.robot_control.update_slider()" orient="vertical">
+            <input id="left_eye_b" data-pwm-channel="14" type="range" min="0" max="1" step="0.1" oninput="robot.update_slider(this, event)" orient="vertical">
           </div>
         </div>
 
-      <div class="led_display_container">
+      <div id="led_display_container">
         <p>LED Display</p>
 
 <!--
@@ -57,7 +57,9 @@
         <% end %>
 
         <br/>
+-->
 
+<!--
         <% [1, 0].each do |channel| %>
           <% [12, 8, 4, 0].each do |col| %>
           <div class="led_display_col channel_<%= channel %>">
@@ -71,21 +73,17 @@
           <% end %>
         <% end %>
 -->
-
-        <br/>
       </div>
 
       <div class="button_container">
         <p>Actions</p>
-        <input value="Reset" type="button" onclick="App.robot_control.reset_pwm()">
-        <input value="Idle" type="button" onclick="App.robot_control.idle_pwm()">
-        <input value="Hello" type="button" onclick="App.robot_control.talk('hello, my name is assigato,,  i am a robot,, beep boop')">
-        <input value="Address" type="button" onclick="App.robot_control.display_address()">
+        <input value="Hello" type="button" onclick="robot.speak(this, 'hello, my name is assigato,,  i am a robot,, beep boop')">
+        <!--<input value="Address" type="button" onclick="App.robot_control.display_address()">-->
 
         <br/>
 
         <input id="talk-text" type="text">
-        <input value="Talk" type="button" onclick="App.robot_control.talk_freeform()">
+        <input value="Talk" type="button" onclick="robot.speak(this, $('#talk-text').val())">
       </div>
     </div>
 
