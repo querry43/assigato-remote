@@ -1,6 +1,8 @@
 var robot = {}
 
-robot.socket = new WebSocket('ws://underdogma.net:3000')
+robot.socket_location = 'ws://' + document.location.host + ':3000/'
+
+robot.socket = new WebSocket(robot.socket_location)
 
 robot.socket.onmessage = (event) => {
   let robot = JSON.parse(event.data)

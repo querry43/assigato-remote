@@ -57,8 +57,7 @@ fn main() {
 fn spawn_robot_update_thread(robot: Arc<Mutex<pi_robot::Robot>>) {
     thread::spawn(move || {
         loop {
-            sleep(Duration::from_secs(1));
-            println!("refresh");
+            sleep(Duration::from_millis(50));
             let mut r = robot.lock().unwrap();
             match r.refresh() {
                 Err(err) => println!("refresh error: {:?}", err),
