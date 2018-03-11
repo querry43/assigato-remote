@@ -27,7 +27,7 @@ impl Handler for Server {
 
         let res = match m {
             assigato_remote::Message::PWMChannelState(msg) => r.update_pwm_channel(msg),
-            assigato_remote::Message::LEDDisplayState(msg) => r.update_led_display(msg),
+            assigato_remote::Message::ShiftRegisterState(msg) => r.update_shift_register(msg),
             assigato_remote::Message::RobotSpeak(msg) => r.robot_speak(msg),
         };
 

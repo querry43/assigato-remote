@@ -9,7 +9,7 @@ extern crate serde_derive;
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Message {
     PWMChannelState(pi_robot::PWMChannelState),
-    LEDDisplayState(pi_robot::LEDDisplayState),
+    ShiftRegisterState(pi_robot::ShiftRegisterState),
     RobotSpeak(pi_robot::RobotSpeak),
 }
 

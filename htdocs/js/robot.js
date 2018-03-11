@@ -14,11 +14,10 @@ robot.socket.onmessage = (event) => {
     }
   })
 
-  robot.led_displays.forEach((led_display_channel) => {
-    let channel = led_display_channel.channel
-    console.log(channel)
-    led_display_channel.state.forEach((value, idx) => {
-      let pixel = $('.led_pixel[data-led-display-channel="' + channel + '"][data-idx="' + idx + '"]')
+  robot.shift_registers.forEach((shift_register_channel) => {
+    let channel = shift_register_channel.channel
+    shift_register_channel.state.forEach((value, idx) => {
+      let pixel = $('.led_pixel[data-shift-register-channel="' + channel + '"][data-idx="' + idx + '"]')
       pixel.attr('data-on', value ? 1 : 0)
     })
   })
@@ -44,8 +43,8 @@ robot.speak = function (element, quip) {
 }
 
 robot.toggle_led = function (element, event) {
-  let channel = parseInt(element.dataset.ledDisplayChannel)
-  let pixels = $('.led_pixel[data-led-display-channel="' + channel + '"]')
+  let channel = parseInt(element.dataset.shiftRegisterChannel)
+  let pixels = $('.led_pixel[data-shift-register-channel="' + channel + '"]')
   let state = []
 
   pixels.each((_, element) => {
@@ -55,7 +54,7 @@ robot.toggle_led = function (element, event) {
   state[parseInt(element.dataset.idx)] = (element.dataset.on == 1 ? false : true)
 
   let message = {
-    LEDDisplayState: {
+    ShiftRegisterState: {
       channel: channel,
       state: state,
     }
@@ -66,14 +65,14 @@ robot.toggle_led = function (element, event) {
 
 Array(1, 0).forEach((channel) => {
   Array(3, 2, 1, 0).forEach((col) => {
-    let div = $('<div class="led_display_col" data-led-display-channel=""></div>')
+    let div = $('<div class="led_display_col" data-shift-register-channel=""></div>')
     $("#led_display_container").append(div)
     Array(0, 1, 2, 3).forEach((row) => {
       let img = $('<div>')
       img.addClass('led_pixel')
       img.attr('data-on', '0')
       img.attr('data-idx', (col*4) + row)
-      img.attr('data-led-display-channel', channel)
+      img.attr('data-shift-register-channel', channel)
       img.attr('onclick', 'robot.toggle_led(this, event)')
       div.append(img)
     })

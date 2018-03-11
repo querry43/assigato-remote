@@ -103,7 +103,7 @@ pwm_channels:
     high: 1000
     initial_position: 0.5
 
-led_displays:
+shift_registers:
   - channel: 0
     clock_pin: 20
     data_pin: 21
