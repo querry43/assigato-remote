@@ -386,7 +386,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "pi-robot"
 version = "0.1.0"
-source = "git+https://github.com/querry43/rust-pi-robot.git#ed60c24c97dbbbb0faf483dbb046c020876ff1c0"
+source = "git+https://github.com/querry43/rust-pi-robot.git#22afaa7efef412730694ef26bf0f9150b3d2215c"
 dependencies = [
  "config 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "i2c-pca9685 0.1.9-pre (git+https://github.com/querry43/i2c-pca9685)",
