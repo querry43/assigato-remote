@@ -12,48 +12,56 @@ pwm_channels:
     low: 300
     high: 550
     initial_position: 0
+    idle_after_seconds: 15
   - channel: 1
     name: Left Arm
     invert: false
     low: 200
     high: 500
     initial_position: 0
+    idle_after_seconds: 15
   - channel: 2
     name: Head Pan
     invert: true
     low: 200
     high: 500
     initial_position: 0.5
+    idle_after_seconds: 15
   - channel: 3
     name: Torso
     invert: false
     low: 200
     high: 500
     initial_position: 0.5
+    idle_after_seconds: 15
   - channel: 4
     name: Head Tilt
     invert: false
     low: 400
     high: 500
     initial_position: 0.3
+    idle_after_seconds: 15
   - channel: 5
     name: Unused
     invert: false
     low: 40
     high: 1000
     initial_position: 0.5
+    idle_after_seconds: 15
   - channel: 6
     name: Unused
     invert: false
     low: 40
     high: 1000
     initial_position: 0.5
+    idle_after_seconds: 15
   - channel: 7
     name: Unused
     invert: false
     low: 40
     high: 1000
     initial_position: 0.5
+    idle_after_seconds: 15
   - channel: 8
     name: Right Eye Red
     invert: false
@@ -78,6 +86,7 @@ pwm_channels:
     low: 40
     high: 1000
     initial_position: 0.5
+    idle_after_seconds: 15
   - channel: 12
     name: Left Eye Red
     invert: false
