@@ -9,7 +9,7 @@ robot.socket.onmessage = (event) => {
 
   robot.pwm_channels.forEach((pwm_channel) => {
     let element = $("input[data-pwm-channel='" + pwm_channel.channel + "']")
-    if (element.length > 0) {
+    if (element.length > 0 && pwm_channel.position !== null) {
       element.val(pwm_channel.position)
     }
   })
@@ -61,6 +61,19 @@ robot.toggle_led = function (element, event) {
   }
 
   robot.socket.send(JSON.stringify(message))
+}
+
+robot.idle_pwm_channels = function (element, event) {
+  let pwm_channels = $("input[data-pwm-channel]")
+  pwm_channels.each((_, element) => {
+    let message = {
+      PWMChannelState: {
+        channel: parseInt(element.dataset.pwmChannel),
+        position: undefined,
+      }
+    }
+    robot.socket.send(JSON.stringify(message))
+  })
 }
 
 Array(1, 0).forEach((channel) => {
